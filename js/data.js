@@ -6,10 +6,8 @@ var savedData;
 
   window.data = {
     getData: function() {
-      console.log("All resources finished loading!");
       window.backend.load((function(response) {
         savedData = response.slice();
-        console.log(savedData);
       }));
     }
   };
