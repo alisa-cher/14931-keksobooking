@@ -55,6 +55,9 @@ function getValues(array) {
     });
 }
 
-formElement.addEventListener('change', function () {
+var onInputClickHandler = window.debounce(function(evt) {
   console.dir(getValues(savedData));
-});
+  console.log(evt.target);
+}, 5000);
+
+formElement.addEventListener('change', onInputClickHandler);
