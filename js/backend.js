@@ -64,9 +64,16 @@
         document.body.insertAdjacentElement('afterbegin', node);
       }
 
-      node.addEventListener('click', function () {
-        node.remove();
-      });
+      var removeErrorMessage = function () {
+		  node.remove();
+	  };
+
+      node.addEventListener('click', removeErrorMessage);
+      document.addEventListener('keydown', function (evt) {
+          if (evt.keyCode === ESC_CODE){
+			  removeErrorMessage();
+          }
+	  });
     },
     load: function (onLoad, onError) {
       var xhr = new XMLHttpRequest();

@@ -5,12 +5,10 @@ var savedData;
 (function () {
 
   window.data = {
-    getData: function() {
+    get: function() {
       window.backend.load((function(response) {
         savedData = response.slice();
-      }));
+      }), window.backend.errorHandler);
     }
   };
 }());
-
-window.addEventListener("load", window.data.getData);
