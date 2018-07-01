@@ -1,6 +1,12 @@
 'use strict';
 
 (function () {
+
+  window.keycodes = {
+    ESC: 27,
+    ENTER: 13
+  };
+
   window.debounce = function (fun, time) {
     var counter;
 
