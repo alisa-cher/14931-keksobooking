@@ -47,16 +47,16 @@
       var node = document.createElement('div');
       node.classList.add('error-popup');
       node.style = 'z-index: 100; ' +
-        'margin: 0 auto; ' +
-        'padding: 15px 0; ' +
-        'text-align: center; ' +
-        'background-color: #a8e4ee; ' +
-        'cursor: pointer; ' +
-        'position: fixed; ' +
-        'left: 0; ' +
-        'right: 0; ' +
-        'bottom: 0;' +
-        'font-size: 18px';
+          'margin: 0 auto; ' +
+          'padding: 15px 0; ' +
+          'text-align: center; ' +
+          'background-color: #a8e4ee; ' +
+          'cursor: pointer; ' +
+          'position: fixed; ' +
+          'left: 0; ' +
+          'right: 0; ' +
+          'bottom: 0;' +
+          'font-size: 18px';
       var nodeExists = document.querySelector('.error-popup');
 
       if (!nodeExists) {
@@ -65,15 +65,15 @@
       }
 
       var removeErrorMessage = function () {
-		  node.remove();
-	  };
+        node.remove();
+      };
 
       node.addEventListener('click', removeErrorMessage);
       document.addEventListener('keydown', function (evt) {
-          if (evt.keyCode === ESC_CODE){
-			  removeErrorMessage();
-          }
-	  });
+        if (evt.keyCode === window.keycodes.ESC) {
+          removeErrorMessage();
+        }
+      });
     },
     load: function (onLoad, onError) {
       var xhr = new XMLHttpRequest();
