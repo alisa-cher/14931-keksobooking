@@ -1,16 +1,15 @@
 'use strict';
 
-var offerFeatures = document.querySelectorAll('#housing-features input');
-var filterForm = document.querySelector('.map__filters');
-
 (function () {
+  var offerFeatures = document.querySelectorAll('#housing-features input');
+
   var filterArray = function (array) {
     return array
         .filter(function (item) {
           var thisRooms = item.offer.rooms;
           var offerRooms = document.querySelector('#housing-rooms').value;
 
-          return (offerRooms !== 'any') ? thisRooms === parseInt(offerRooms) : true;
+          return (offerRooms !== 'any') ? thisRooms === parseInt(offerRooms, 10) : true;
         })
         .filter(function (item) {
           var thisType = item.offer.type;
@@ -22,7 +21,7 @@ var filterForm = document.querySelector('.map__filters');
           var thisGuests = item.offer.guests;
           var offerCapacity = document.querySelector('#housing-guests').value;
 
-          return (offerCapacity !== 'any') ? thisGuests === parseInt(offerCapacity) : true;
+          return (offerCapacity !== 'any') ? thisGuests === parseInt(offerCapacity, 10) : true;
         })
         .filter(function (item) {
           var thisPrice = item.offer.price;
@@ -50,7 +49,7 @@ var filterForm = document.querySelector('.map__filters');
           }
           return checkedCheckboxes.every(function (instance) {
             return (thisFeatures.indexOf(instance) !== -1);
-          })
+          });
         });
   };
 
@@ -64,5 +63,5 @@ var filterForm = document.querySelector('.map__filters');
 
   }, 500);
 
-  filterForm.addEventListener('change', onInputClickHandler);
+  window.elements.filter.addEventListener('change', onInputClickHandler);
 }());

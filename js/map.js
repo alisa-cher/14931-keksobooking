@@ -1,30 +1,27 @@
 'use strict';
 
 (function () {
-  var resetButton = document.querySelector('.ad-form__reset');
-
   window.map = {
+    activeMode: null,
     enableDisabledMode: function () {
-      activeMode = null;
-      mapElement.classList.add('map--faded');
-      formElement.classList.add('ad-form--disabled');
-      window.form.reset();
+      window.map.activeMode = null;
+      window.elements.map.classList.add('map--faded');
+      window.elements.form.classList.add('ad-form--disabled');
+      window.form.resetAll();
       window.pins.clear();
+      window.pins.resetInitialMainPinState();
       window.offers.clear();
     },
     enableActiveMode: function () {
-      mapElement.classList.remove('map--faded');
-      formElement.classList.remove('ad-form--disabled');
-      for (var i = 0; i < inputFields.length; i++) {
-        inputFields[i].removeAttribute('disabled');
-      }
-
-      inputAdress.value = (pinMain.offsetLeft + PIN_MAIN_WIDTH / 2) + ' , ' + (pinMain.offsetTop - PIN_MAIN_HEIGHT);
-
+      window.elements.map.classList.remove('map--faded');
+      window.elements.form.classList.remove('ad-form--disabled');
+      window.form.resetAddressValue();
+      window.form.enableFields();
       window.data.get();
+
       if (window.data.saved) {
-        activeMode = true;
-        filterForm.classList.remove('hidden');
+        window.map.activeMode = true;
+        window.elements.filter.classList.remove('hidden');
         window.pins.generate(window.data.saved);
         window.offers.render(window.data.saved);
       }
@@ -32,5 +29,6 @@
   };
 
   window.map.enableDisabledMode();
+  var resetButton = document.querySelector('.ad-form__reset');
   resetButton.addEventListener('click', window.map.enableDisabledMode);
 })();

@@ -1,7 +1,5 @@
 'use strict';
 
-var map = document.querySelector('.map');
-
 (function () {
 
   window.offers = {
@@ -11,7 +9,6 @@ var map = document.querySelector('.map');
         offerExists.remove();
       }
     },
-
     getTemplate: function (offers, obj) {
 
       var template = document.querySelector('template').content;
@@ -60,9 +57,8 @@ var map = document.querySelector('.map');
       }
 
 
-      mapElement.appendChild(offerElement);
+      window.elements.map.appendChild(offerElement);
     },
-    // render offers on pin click
     render: function (offers) {
       var pins = document.querySelectorAll('.map__pin:not(.map__pin--main)');
 

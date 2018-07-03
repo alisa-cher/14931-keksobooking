@@ -1,10 +1,8 @@
 'use strict';
 
-var inputAdress = document.querySelector('#address');
-var inputFields = document.querySelectorAll('.ad-form fieldset');
-var priceField = document.querySelector('#price');
-
 (function () {
+  var inputFields = document.querySelectorAll('.ad-form fieldset');
+  var priceField = document.querySelector('#price');
   var checkinField = document.querySelector('#timein');
   var checkoutField = document.querySelector('#timeout');
   var roomsField = document.querySelector('#room_number');
@@ -13,26 +11,41 @@ var priceField = document.querySelector('#price');
   var successElement = document.querySelector('.success');
 
   window.form = {
-    reset: function () {
-      formElement.reset();
-      priceField.min = '1000';
-      priceField.placeholder = '1000';
+    disableFields: function () {
+      for (var i = 0; i < inputFields.length; i++) {
+        inputFields[i].setAttribute('disabled', '');
+      }
+    },
+    enableFields: function () {
+      for (var i = 0; i < inputFields.length; i++) {
+        inputFields[i].removeAttribute('disabled');
+      }
+    },
+    resetGuestsValue: function () {
       guestsField[0].setAttribute('disabled', '');
       guestsField[1].setAttribute('disabled', '');
       guestsField[2].removeAttribute('disabled', '');
       guestsField.selectedIndex = '2';
       guestsField[3].setAttribute('disabled', '');
-      inputAdress.setAttribute('value', PIN_INITIAL_POSITIONING);
-      pinMain.style.top = PIN_INITIAL_Y + 'px';
-      pinMain.style.left = PIN_INITIAL_X + 'px';
-      for (var i = 0; i < inputFields.length; i++) {
-        inputFields[i].setAttribute('disabled', '');
-      }
+    },
+    resetAddressValue: function () {
+      window.elements.addressField.value = (window.pins.PIN_MAIN_INITIAL_COORDS.X + window.pins.PIN_MAIN_WIDTH / 2) + ' , ' + (window.pins.PIN_MAIN_INITIAL_COORDS.Y + window.pins.PIN_MAIN_HEIGHT);
+    },
+    resetPriceValue: function () {
+      priceField.min = '1000';
+      priceField.placeholder = '1000';
+    },
+    resetAll: function () {
+      window.elements.form.reset();
+      window.form.resetPriceValue();
+      window.form.resetGuestsValue();
+      window.form.resetAddressValue();
+      window.form.disableFields();
     }
   };
 
   var checkboxPressEnterHandler = function (evt) {
-    if (evt.keyCode === window.keycode.ENTER && evt.target.type === 'checkbox') {
+    if (evt.keyCode === window.keycodes.ENTER && evt.target.type === 'checkbox') {
       evt.target.checked = !evt.target.checked;
     }
   };
@@ -106,7 +119,7 @@ var priceField = document.querySelector('#price');
 
   var submitButtonPressHandler = function (evt) {
     evt.preventDefault();
-    window.backend.upload(new FormData(formElement), successFormLoadHandler, window.backend.errorHandler);
+    window.backend.upload(new FormData(window.elements.form), successFormLoadHandler, window.backend.errorHandler);
   };
 
   var showSuccessWindow = function () {
@@ -127,5 +140,5 @@ var priceField = document.querySelector('#price');
   document.addEventListener('keydown', hideSuccessWindow);
   successElement.addEventListener('click', hideSuccessWindow);
   document.addEventListener('keydown', checkboxPressEnterHandler);
-  formElement.addEventListener('submit', submitButtonPressHandler);
+  window.elements.form.addEventListener('submit', submitButtonPressHandler);
 })();
