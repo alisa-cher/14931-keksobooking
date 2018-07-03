@@ -20,7 +20,6 @@
     var counter;
 
     return function () {
-      var context = this;
       var args = arguments;
 
       if (counter) {
@@ -29,7 +28,7 @@
 
       counter = window.setTimeout(function () {
         counter = null;
-        fun.apply(context, args);
+        fun.apply(null, args);
       }, time);
     };
   };

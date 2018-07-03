@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  var DEBOUNCE_INTERVAL = 500;
   var offerFeatures = document.querySelectorAll('#housing-features input');
 
   var filterArray = function (array) {
@@ -61,7 +62,7 @@
     window.pins.generate(finalData);
     window.offers.render(finalData);
 
-  }, 500);
+  }, DEBOUNCE_INTERVAL);
 
   window.elements.filter.addEventListener('change', onInputClickHandler);
 }());
