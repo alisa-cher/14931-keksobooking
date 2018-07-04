@@ -5,7 +5,7 @@
   var PINS_QUANTITY = 5;
   var MAP_LEFT_X = 0;
   var Y_MIN_VALUE = 130;
-  var Y_MAX_VALUE = 625;
+  var Y_MAX_VALUE = 630;
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
   var PIN_MAIN_WIDTH = 66;
@@ -59,14 +59,14 @@
     }
   };
 
-  var pinMainEnterButtonPress = function (evt) {
+  var pinMainEnterButtonPressHandler = function (evt) {
     evt.preventDefault();
 
     if ((evt.keyCode === window.keycodes.ENTER) && (!window.map.activeMode)) {
       window.map.enableActiveMode();
     }
   };
-  var pinMainHandle = function (evt) {
+  var pinMainHandler = function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -74,7 +74,7 @@
       y: evt.clientY
     };
 
-    var onMouseMove = function (moveEvt) {
+    var pinMainMouseMoveHandler = function (moveEvt) {
       moveEvt.preventDefault();
 
       var shift = {
@@ -115,19 +115,19 @@
       }
     };
 
-    var onMouseUp = function (upEvt) {
+    var pinMainMouseUpHandler = function (upEvt) {
       upEvt.preventDefault();
 
       window.elements.addressField.value = (window.elements.pinMain.offsetLeft + PIN_MAIN_WIDTH / 2) + ' , ' + (window.elements.pinMain.offsetTop + PIN_MAIN_HEIGHT);
 
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mousemove', pinMainMouseMoveHandler);
+      document.removeEventListener('mouseup', pinMainMouseUpHandler);
     };
 
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mousemove', pinMainMouseMoveHandler);
+    document.addEventListener('mouseup', pinMainMouseUpHandler);
   };
-  window.elements.pinMain.addEventListener('mousedown', pinMainHandle);
-  window.elements.pinMain.addEventListener('keydown', pinMainEnterButtonPress);
+  window.elements.pinMain.addEventListener('mousedown', pinMainHandler);
+  window.elements.pinMain.addEventListener('keydown', pinMainEnterButtonPressHandler);
 
 })();

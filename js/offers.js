@@ -2,6 +2,9 @@
 
 (function () {
 
+  var PICTURE_WIDTH = 45;
+  var PICTURE_HEIGHT = 40;
+
   window.offers = {
     clear: function () {
       var offerExists = document.querySelector('.map__card');
@@ -49,8 +52,8 @@
         var picturesWrapper = element.querySelector('.popup__photos');
         var photosItem = document.createElement('img');
         photosItem.src = photosArray[i];
-        photosItem.style.width = '45px';
-        photosItem.style.height = '40px';
+        photosItem.style.width = PICTURE_WIDTH + 'px';
+        photosItem.style.height = PICTURE_HEIGHT + 'px';
         photosItem.classList = 'popup__photo';
         photosItem.alt = 'Фотография жилья';
         picturesWrapper.appendChild(photosItem);

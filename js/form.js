@@ -29,11 +29,11 @@
       guestsField[3].setAttribute('disabled', '');
     },
     resetAddressValue: function () {
-      window.elements.addressField.value = (window.pins.PIN_MAIN_INITIAL_COORDS.X + window.pins.PIN_MAIN_WIDTH / 2) + ' , ' + (window.pins.PIN_MAIN_INITIAL_COORDS.Y + window.pins.PIN_MAIN_HEIGHT);
+      window.elements.addressField.setAttribute('value', (window.pins.PIN_MAIN_INITIAL_COORDS.X + window.pins.PIN_MAIN_WIDTH / 2) + ' , ' + (window.pins.PIN_MAIN_INITIAL_COORDS.Y + window.pins.PIN_MAIN_HEIGHT));
     },
     resetPriceValue: function () {
       priceField.min = '1000';
-      priceField.placeholder = '1000';
+      priceField.placeholder = priceField.min;
     },
     resetAll: function () {
       window.elements.form.reset();
@@ -50,7 +50,7 @@
     }
   };
 
-  var setMinFieldValue = function () {
+  var propertyTypeFieldChangeHandler = function () {
     switch (propertyTypeField.value) {
       case 'bungalo':
         priceField.min = '0';
@@ -70,7 +70,7 @@
     }
   };
 
-  var syncValue = function (evt) {
+  var checkinAndCheckoutFieldsChangeHandler = function (evt) {
     var target = evt.currentTarget;
     if (target === checkoutField) {
       checkinField.value = checkoutField.value;
@@ -79,7 +79,7 @@
     }
   };
 
-  var syncGuests = function () {
+  var roomsFieldChangeHandler = function () {
     switch (roomsField.selectedIndex) {
       case 0:
         guestsField[0].setAttribute('disabled', '');
@@ -126,19 +126,19 @@
     successElement.classList.remove('hidden');
   };
 
-  var hideSuccessWindow = function (evt) {
+  var successWindowClickAndPressButtonHandler = function (evt) {
     if (evt.keyCode === window.keycodes.ESC || evt.type === 'click') {
       successElement.classList.add('hidden');
     }
   };
 
-  propertyTypeField.addEventListener('change', setMinFieldValue);
-  checkinField.addEventListener('change', syncValue);
-  checkoutField.addEventListener('change', syncValue);
-  roomsField.addEventListener('click', syncGuests);
-  roomsField.addEventListener('change', syncGuests);
-  document.addEventListener('keydown', hideSuccessWindow);
-  successElement.addEventListener('click', hideSuccessWindow);
+  propertyTypeField.addEventListener('change', propertyTypeFieldChangeHandler);
+  checkinField.addEventListener('change', checkinAndCheckoutFieldsChangeHandler);
+  checkoutField.addEventListener('change', checkinAndCheckoutFieldsChangeHandler);
+  roomsField.addEventListener('click', roomsFieldChangeHandler);
+  roomsField.addEventListener('change', roomsFieldChangeHandler);
+  document.addEventListener('keydown', successWindowClickAndPressButtonHandler);
+  successElement.addEventListener('click', successWindowClickAndPressButtonHandler);
   document.addEventListener('keydown', checkboxPressEnterHandler);
   window.elements.form.addEventListener('submit', submitButtonPressHandler);
 })();
