@@ -41,6 +41,7 @@
       window.form.resetGuestsValue();
       window.form.resetAddressValue();
       window.form.disableFields();
+      window.uploader.clearPreviews();
     }
   };
 
@@ -54,19 +55,19 @@
     switch (propertyTypeField.value) {
       case 'bungalo':
         priceField.min = '0';
-        priceField.placeholder = '0';
+        priceField.placeholder = priceField.min;
         break;
       case 'flat':
         priceField.min = '1000';
-        priceField.placeholder = '1000';
+        priceField.placeholder = priceField.min;
         break;
       case 'house':
         priceField.min = '5000';
-        priceField.placeholder = '5000';
+        priceField.placeholder = priceField.min;
         break;
       default:
         priceField.min = '10000';
-        priceField.placeholder = '10000';
+        priceField.placeholder = priceField.min;
     }
   };
 
