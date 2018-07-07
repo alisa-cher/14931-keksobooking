@@ -10,7 +10,6 @@
   var galleryPhotoChooser = document.querySelector('.ad-form__input');
   var galleryAllPhotosContainer = document.querySelector('.ad-form__photo-container');
   var galleryMainPreviewWrapper = document.querySelector('.ad-form__photo:not(.ad-form__photo--secondary)');
-  var gallerySecondaryPreviewsWrapper = document.querySelectorAll('.ad-form__photo--secondary');
 
   var setImagePath = function (evt, preview) {
     preview.src = evt.target.result;
@@ -63,6 +62,7 @@
     clearPreviews: function () {
       avatarPreview.src = AVATAR_URL;
       var mainPreview = galleryMainPreviewWrapper.querySelector('img');
+      var gallerySecondaryPreviewsWrapper = document.querySelectorAll('.ad-form__photo--secondary');
 
       if (mainPreview) {
         mainPreview.remove();

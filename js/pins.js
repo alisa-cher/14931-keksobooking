@@ -66,7 +66,7 @@
       window.map.enableActiveMode();
     }
   };
-  var pinMainHandler = function (evt) {
+  var pinMainMouseDownHandler = function (evt) {
     evt.preventDefault();
 
     var startCoords = {
@@ -127,7 +127,7 @@
     document.addEventListener('mousemove', pinMainMouseMoveHandler);
     document.addEventListener('mouseup', pinMainMouseUpHandler);
   };
-  window.elements.pinMain.addEventListener('mousedown', pinMainHandler);
+  window.elements.pinMain.addEventListener('mousedown', pinMainMouseDownHandler);
   window.elements.pinMain.addEventListener('keydown', pinMainEnterButtonPressHandler);
 
 })();
