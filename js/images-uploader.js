@@ -8,9 +8,13 @@
   var avatarPreview = document.querySelector('.ad-form-header__preview img');
 
   var galleryPhotoChooser = document.querySelector('.ad-form__input');
-  var galleryPhotoMainPreview = document.querySelector('.ad-form__photo:not(.ad-form__photo--secondary)');
-  var galleryPhotoSecondaryPreviews = document.querySelectorAll('.ad-form__photo--secondary');
-  var galleryPhotosWrapper = document.querySelector('.ad-form__photo-container');
+  var galleryAllPhotosContainer = document.querySelector('.ad-form__photo-container');
+  var galleryMainPreviewWrapper = document.querySelector('.ad-form__photo:not(.ad-form__photo--secondary)');
+  var gallerySecondaryPreviewsWrapper = document.querySelectorAll('.ad-form__photo--secondary');
+
+  var setImagePath = function (evt, preview) {
+    preview.src = evt.target.result;
+  };
 
   var uploadImages = function (chooser, cb) {
     for (var i = 0; i < chooser.files.length; i++) {
@@ -29,46 +33,43 @@
     }
   };
 
-  var generateGalleryImages = function (evt) {
+  var galleryImagesLoadHandler = function (evt) {
     var preview = document.createElement('img');
     var previewWrapper = document.createElement('div');
 
     setImagePath(evt, preview);
 
-    if (!galleryPhotoMainPreview.children.length) {
-      galleryPhotoMainPreview.appendChild(preview);
+    if (!galleryMainPreviewWrapper.children.length) {
+      galleryMainPreviewWrapper.appendChild(preview);
     } else {
       previewWrapper.classList.add('ad-form__photo', 'ad-form__photo--secondary');
       previewWrapper.appendChild(preview);
-      galleryPhotosWrapper.appendChild(previewWrapper);
+      galleryAllPhotosContainer.appendChild(previewWrapper);
     }
   };
 
-  var setImagePath = function (evt, preview) {
-    preview.src = evt.target.result;
-  };
-
   var avatarInputChangeHandler = function () {
-    var generateAvatar = function (evt) {
+    var avatarLoadHandler = function (evt) {
       return setImagePath(evt, avatarPreview);
     };
-    uploadImages(avatarChooser, generateAvatar);
+    uploadImages(avatarChooser, avatarLoadHandler);
   };
 
   var galleryInputChangeHandler = function () {
-    uploadImages(galleryPhotoChooser, generateGalleryImages);
+    uploadImages(galleryPhotoChooser, galleryImagesLoadHandler);
   };
 
   window.uploader = {
     clearPreviews: function () {
       avatarPreview.src = AVATAR_URL;
-      var mainPreview = galleryPhotoMainPreview.querySelector('img');
+      var mainPreview = galleryMainPreviewWrapper.querySelector('img');
 
       if (mainPreview) {
         mainPreview.remove();
       }
-      for (var i = 0; i < galleryPhotoSecondaryPreviews.length; i++) {
-        galleryPhotoSecondaryPreviews[i].remove();
+
+      for (var i = 0; i < gallerySecondaryPreviewsWrapper.length; i++) {
+        gallerySecondaryPreviewsWrapper[i].remove();
       }
     }
   };
