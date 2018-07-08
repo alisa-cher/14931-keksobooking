@@ -29,7 +29,7 @@
       guestsField[3].setAttribute('disabled', '');
     },
     resetAddressValue: function () {
-      window.elements.addressField.setAttribute('value', (window.pins.PIN_MAIN_INITIAL_COORDS.X + window.pins.PIN_MAIN_WIDTH / 2) + ' , ' + (window.pins.PIN_MAIN_INITIAL_COORDS.Y + window.pins.PIN_MAIN_HEIGHT));
+      window.elements.addressField.setAttribute('value', (window.pins.PIN_MAIN_INITIAL_COORDS.X + window.pins.PIN_MAIN_WIDTH / 2) + ' , ' + (window.pins.PIN_MAIN_INITIAL_COORDS.Y + window.pins.PIN_MAIN_HEIGHT ));
     },
     resetPriceValue: function () {
       priceField.min = '1000';

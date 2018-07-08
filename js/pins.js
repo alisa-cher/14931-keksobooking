@@ -9,7 +9,7 @@
   var PIN_WIDTH = 50;
   var PIN_HEIGHT = 70;
   var PIN_MAIN_WIDTH = 66;
-  var PIN_MAIN_HEIGHT = 74;
+  var PIN_MAIN_HEIGHT = 84;
   var pinY = window.elements.pinMain.offsetTop;
   var pinX = window.elements.pinMain.offsetLeft;
 
@@ -90,10 +90,10 @@
       var PIN_FINAL_Y = window.elements.pinMain.offsetTop - shift.y;
       var PIN_FINAL_X = window.elements.pinMain.offsetLeft - shift.x;
 
-      if (PIN_FINAL_Y >= Y_MAX_VALUE) {
-        window.elements.pinMain.style.top = Y_MAX_VALUE + 'px';
-      } else if (PIN_FINAL_Y <= Y_MIN_VALUE) {
-        window.elements.pinMain.style.top = Y_MIN_VALUE + 'px';
+      if (PIN_FINAL_Y >= Y_MAX_VALUE - PIN_MAIN_HEIGHT) {
+        window.elements.pinMain.style.top = Y_MAX_VALUE - PIN_MAIN_HEIGHT + 'px';
+      } else if (PIN_FINAL_Y <= Y_MIN_VALUE - PIN_MAIN_HEIGHT) {
+        window.elements.pinMain.style.top = Y_MIN_VALUE - PIN_MAIN_HEIGHT + 'px';
       } else {
         window.elements.pinMain.style.top = (window.elements.pinMain.offsetTop - shift.y) + 'px';
       }
@@ -108,7 +108,7 @@
         window.elements.pinMain.style.left = PIN_FINAL_X + 'px';
       }
 
-      window.elements.addressField.value = ((window.elements.pinMain.offsetLeft - shift.x) + PIN_MAIN_WIDTH / 2) + ' , ' + ((window.elements.pinMain.offsetTop - shift.y) - PIN_MAIN_HEIGHT);
+      window.elements.addressField.value = ((window.elements.pinMain.offsetLeft - shift.x) + PIN_MAIN_WIDTH / 2) + ' , ' + ((window.elements.pinMain.offsetTop - shift.y) + PIN_MAIN_HEIGHT);
 
       if (!window.map.activeMode) {
         window.map.enableActiveMode();
